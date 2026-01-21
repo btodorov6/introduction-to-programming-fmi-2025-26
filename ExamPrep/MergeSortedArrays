@@ -1,0 +1,63 @@
+#include <iostream>
+using std::cin;
+using std::cout;
+using std::endl;
+const int MAX = 50;
+void enterIntArr(int* arr, const int size)
+{
+    for (int i = 0; i < size;i++)
+    {
+        cin >> arr[i];
+    }
+}
+void printIntArr(const int* arr, const int size)
+{
+    for (int i = 0; i < size;i++)
+    {
+        cout << arr[i] <<" ";
+    }
+    cout << endl;
+}
+int* CombineSortedArrays(const int* arr1, const int* arr2, const int size1, const int size2)
+{
+    int i = 0, j = 0, t = 0;
+    int* result = new int[size1 + size2];
+    while (i < size1 && j < size2)
+    {
+        if (arr1[i] < arr2[j])
+        {
+            result[t] = arr1[i];
+            i++;
+        }
+        else
+        {
+            result[t] = arr2[j];
+            j++;
+        }
+        t++;
+    }
+    while (i < size1)
+    {
+        result[t] = arr1[i];
+        i++;
+        t++;
+    }
+    while (j < size2)
+    {
+        result[t] = arr2[j];
+        j++;
+        t++;
+    }
+    return result;
+}
+int main()
+{
+    int arr1[MAX], arr2[MAX], size1,size2;
+    cin >> size1;
+    enterIntArr(arr1, size1);
+    cin >> size2;
+    enterIntArr(arr2, size2);
+    int* result = CombineSortedArrays(arr1, arr2, size1, size2);
+    printIntArr(result, size1 + size2);
+    delete[] result;
+}
